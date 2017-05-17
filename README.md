@@ -5,4 +5,4 @@
       password: 1111
 
 ***
-my_features-7.x-1.0.tar згенеровано модулем Features
+`my_features-7.x-1.0.tar` згенеровано модулем Features
