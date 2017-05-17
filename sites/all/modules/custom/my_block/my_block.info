@@ -1,0 +1,5 @@
+; &id:$
+name = My block
+description = module with custom blocks
+version = 7.x-dev
+core = 7.x

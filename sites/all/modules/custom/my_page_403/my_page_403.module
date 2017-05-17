@@ -1,0 +1,23 @@
+<?php
+/**
+ * Implements hook_menu()
+ */
+
+function my_page_403_menu() {
+	$items = array();
+	$items['page-403'] = array(
+			'title' 			=> 'Access denied',
+			'page callback' 	=> 'page_403',
+			'access callback' 	=> TRUE
+	);
+	return $items;
+}
+
+/**
+ * Function my_first_page
+ */
+
+function page_403() {
+	return t('<h1>You are not authorized to access this page</h1>');
+}
+?>

@@ -1,0 +1,5 @@
+; &id:$
+name = My page 403
+description = Page 403
+version = 7.x-dev
+core = 7.x

@@ -1,0 +1,23 @@
+<?php
+/**
+ * Implements hook_menu()
+ */
+
+function my_page_404_menu() {
+	$items = array();
+	$items['page-404'] = array(
+			'title' 			=> '404, That\'s an error',
+			'page callback' 	=> 'page_404',
+			'access callback' 	=> TRUE
+	);
+	return $items;
+}
+
+/**
+ * Function my_first_page
+ */
+
+function page_404() {
+	return t('<h1>The requested URL ' . $_SERVER['REQUEST_URI'] . ' was not found on this server.</h1>');
+}
+?>
