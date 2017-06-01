@@ -1,0 +1,290 @@
+<?php
+/**
+ * Implements hook_install().
+ */
+function task_install() {
+  node_types_rebuild();
+  $types = node_type_get_types();
+  node_add_body_field($types['form_submissions']);
+  foreach (_task_installed_fields() as $field) {
+    field_create_field($field);
+  }
+  foreach (_task_installed_instances() as $fieldinstance) {
+    $fieldinstance['entity_type'] = 'node';
+    $fieldinstance['bundle'] = 'form_submissions';
+    print_r($fieldinstance);
+    field_create_instance($fieldinstance);
+  }
+}
+
+/**
+ * Create custom_field().
+ */
+function _task_installed_fields() {
+  return array(
+    'task_campus' => array(
+      'field_name' => 'task_campus',
+      'label' => t('Campus'),
+      'type' => 'text',
+    ),
+    'task_metting_id' => array(
+      'field_name' => 'task_metting_id',
+      'label' => t('Meeting ID'),
+      'type' => 'text',
+    ),
+    'task_travel_date' => array(
+      'field_name' => 'task_travel_date',
+      'label' => t('Travel Date'),
+      'type' => 'text',
+    ),
+    'task_pickup_time' => array(
+      'field_name' => 'task_pickup_time',
+      'label' => t('Pickup Time'),
+      'type' => 'text',
+    ),
+    'task_firstname' => array(
+      'field_name' => 'task_firstname',
+      'label' => t('First Name'),
+      'type' => 'text',
+    ),
+    'task_lastname' => array(
+      'field_name' => 'task_lastname',
+      'label' => t('Last Name'),
+      'type' => 'text',
+    ),
+    'task_mobile_number' => array(
+      'field_name' => 'task_mobile_number',
+      'label' => t('Mobile Number'),
+      'type' => 'text',
+    ),
+    'task_email' => array(
+      'field_name' => 'task_email',
+      'label' => t('Email'),
+      'type' => 'text',
+    ),
+    'task_info_sel_one' => array(
+      'field_name' => 'task_info_sel_one',
+      'label' => t('Sel_one'),
+      'type' => 'text',
+    ),
+    'task_info_sel_two' => array(
+      'field_name' => 'task_info_sel_two',
+      'label' => t('Sel_two'),
+      'type' => 'text',
+    ),
+    'task_flight_time' => array(
+      'field_name' => 'task_flight_time',
+      'label' => t('Flight Arrial Time'),
+      'type' => 'text',
+    ),
+    'task_flight_number' => array(
+      'field_name' => 'task_flight_number',
+      'label' => t('Flight Number'),
+      'type' => 'text',
+    ),
+  );
+}
+
+function _task_installed_instances() {
+  return array(
+    'task_campus'=> array(
+      'field_name' => 'task_campus',
+      'type' => 'text',
+      'label' => t('Cumpus'),
+      'widget' => array(
+        'type' => 'text_textfield'
+      ),
+      'display' => array(
+        'example_node_list' => array(
+          'label' => t('Campus'),
+          'type' => 'text'
+        )
+      )
+    ),
+    'task_metting_id' => array(
+      'field_name' => 'task_metting_id',
+      'type' => 'text',
+      'label' => t('Mettind id'),
+      'widget' => array(
+        'type' => 'text_textfield'
+      ),
+      'display' => array(
+        'example_node_list' => array(
+          'label' => t('Travel Date'),
+          'type' => 'text'
+        )
+      )
+    ),
+    'task_travel_date' => array(
+      'field_name' => 'task_travel_date',
+      'type' => 'text',
+      'label' => t('Travel Date'),
+      'widget' => array(
+        'type' => 'text_textfield'
+      ),
+      'display' => array(
+        'example_node_list' => array(
+          'label' => t('Travel Date'),
+          'type' => 'text'
+        )
+      )
+    ),
+    'task_pickup_time' => array(
+      'field_name' => 'task_pickup_time',
+      'type' => 'text',
+      'label' => t('Pickup Time'),
+      'widget' => array(
+        'type' => 'text_textfield'
+      ),
+      'display' => array(
+        'example_node_list' => array(
+          'label' => t('Pickup Time'),
+          'type' => 'text'
+        )
+      )
+    ),
+    'task_firstname' => array(
+      'field_name' => 'task_firstname',
+      'type' => 'text',
+      'label' => t('First Name'),
+      'widget' => array(
+        'type' => 'text_textfield'
+      ),
+      'display' => array(
+        'example_node_list' => array(
+          'label' => t('First Name'),
+          'type' => 'text'
+        )
+      )
+    ),
+    'task_lastname' => array(
+      'field_name' => 'task_lastname',
+      'type' => 'text',
+      'label' => t('Last Name'),
+      'widget' => array(
+        'type' => 'text_textfield'
+      ),
+      'display' => array(
+        'example_node_list' => array(
+          'label' => t('Last Name'),
+          'type' => 'text'
+        )
+      )
+    ),
+    'task_mobile_number' => array(
+      'field_name' => 'task_mobile_number',
+      'type' => 'text',
+      'label' => t('Mobile Number'),
+      'widget' => array(
+        'type' => 'text_textfield'
+      ),
+      'display' => array(
+        'example_node_list' => array(
+          'label' => t('Mobile Number'),
+          'type' => 'text'
+        )
+      )
+    ),
+    'task_email' => array(
+      'field_name' => 'task_email',
+      'type' => 'text',
+      'label' => t('Email'),
+      'widget' => array(
+        'type' => 'text_textfield'
+      ),
+      'display' => array(
+        'example_node_list' => array(
+          'label' => t('Email'),
+          'type' => 'text'
+        )
+      )
+    ),
+    'task_info_sel_one' => array(
+      'field_name' => 'task_info_sel_one',
+      'type' => 'text',
+      'label' => t('Sel_one'),
+      'widget' => array(
+        'type' => 'text_textfield'
+      ),
+      'display' => array(
+        'example_node_list' => array(
+          'label' => t('Sel_one'),
+          'type' => 'text'
+        )
+      )
+    ),
+    'task_info_sel_two' => array(
+      'field_name' => 'task_info_sel_two',
+      'type' => 'text',
+      'label' => t('Sel_two'),
+      'widget' => array(
+        'type' => 'text_textfield'
+      ),
+      'display' => array(
+        'example_node_list' => array(
+          'label' => t('Sel_two'),
+          'type' => 'text'
+        )
+      )
+    ),
+    'task_flight_time' => array(
+      'field_name' => 'task_flight_time',
+      'type' => 'text',
+      'label' => t('Flight Arrial Time'),
+      'widget' => array(
+        'type' => 'text_textfield'
+      ),
+      'display' => array(
+        'example_node_list' => array(
+          'label' => t('Flight Arrial Time'),
+          'type' => 'text'
+        )
+      )
+    ),
+    'task_flight_number'=> array(
+      'field_name' => 'task_flight_number',
+      'type' => 'text',
+      'label' => t('Flight Number'),
+      'widget' => array(
+        'type' => 'text_textfield',
+      ),
+      'display' => array(
+        'example_node_list' => array(
+          'label' => t('Flight Number'),
+          'type' => 'text',
+        ),
+      ),
+    ),
+
+  );
+}
+
+/**
+ * Implemets hook_uninstall().
+ */
+function task_uninstall() {
+  $ournewtype = 'form_submissions';
+  $sql = 'SELECT nid FROM {node} n WHERE n.type = :type';
+  $result = db_query($sql, array(':type' => $ournewtype));
+  $nodeids = array();
+  foreach ($result as $row) {
+    $nodeids[] = $row->nid;
+  }
+  node_delete_multiple($nodeids);
+  delete_custom_fields();
+  node_type_delete($ournewtype);
+  field_purge_batch(500);
+}
+
+/**
+ * Delete custom fields().
+ */
+function delete_custom_fields() {
+  foreach (array_keys(_task_installed_fields()) as $field) {
+    field_delete_field($field);
+  }
+  $instances = field_info_instances('node', 'form_submissions');
+  foreach ($instances as $instance_name => $fieldinstance) {
+    field_delete_instance($fieldinstance);
+  }
+}

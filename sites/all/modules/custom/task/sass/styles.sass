@@ -1,0 +1,294 @@
+@font-face
+  font-family: "HelveticaNeue"
+  src : url("../fonts/helveticaneuecyr-light.otf")
+
+
+h1#page-title
+  font-size: 40px  !important
+  color: #7400FF
+  @media screen and (max-width: 600px)
+    width: 365px
+
+.form-item-pickup-time
+  label
+    background: url("../images/time.png") no-repeat
+    background-size: 100%
+    display: inline-block
+    width: 31px !important
+    height: 31px !important
+    text-align: right
+    float: right
+    margin-top: 3px
+    margin-left: 10px
+
+
+.form-item-flight-time
+  label
+    background: url("../images/time.png") no-repeat
+    background-size: 100%
+    display: inline-block
+    width: 31px !important
+    height: 31px !important
+    text-align: right
+    float: right
+    margin-top: 3px
+    margin-left: 10px
+
+.form-item-travel-date
+  label
+    background: url("../images/calendar.png") no-repeat
+    background-size: 100%
+    display: inline-block
+    width: 31px !important
+    height: 31px !important
+    text-align: right
+    float: right
+    margin-top: 3px
+    margin-left: 10px
+
+.time_pick
+  float: left
+
+.form-required
+  display: none
+
+.form-type-checkbox
+  display: inline-block
+  margin-bottom: 0px
+
+body
+  #sidebar-first
+    display: none
+  #sidebar-second
+    display: none
+
+#breadcrumb
+  display: none
+
+body
+  #content
+
+    float: none
+    .section
+      width: 800px
+      font-family: "HelveticaNeue"
+      margin: 0 auto
+
+.container-inline-date
+  display: inline-block
+  .description
+    display: none
+
+.form-item-travel-date
+  display: inline-block
+
+body
+  .form-item-travel-date-date
+    input
+      width: 300px !important
+      margin-bottom: 15px
+
+input
+  &[type=text]
+    width: 300px
+    height: 25px
+    border: 1px solid #999 !important
+    font-size: 17px
+
+#lable-one
+  font-size: 25px
+  color: #0D1988
+  @media screen and (max-width: 600px)
+    width: 365px
+
+#edit-lable-two
+  font-size: 25px
+  color: #0D1988
+  @media screen and (max-width: 600px)
+    width: 365px
+
+#edit-lable-tree
+  font-size: 25px
+  color: #0D1988
+  @media screen and (max-width: 600px)
+    width: 365px
+
+body
+  .form-type-checkbox
+    font-size: 20px
+    margin-right: 60px
+
+.form-item-pickup-time
+  display: inline-block
+
+.form-item-meeting-id
+  float: left
+  margin-top: 4px !important
+  display: inline-block
+  margin-right: 65px
+
+.form-item-firstname
+  display: inline-block
+  margin-right: 65px
+
+.form-item-lastname
+  display: inline-block
+
+.form-item-number
+  display: inline-block
+  margin-right: 65px
+
+.form-item-email
+  display: inline-block
+
+.form-item-select
+  display: inline-block
+  margin-right: 65px
+  border: 1px solid #999 !important
+
+.form-item-flight-time
+  display: inline-block
+
+.form-item-airport
+  display: inline-block
+  margin-right: 65px
+  border: 1px solid #999 !important
+
+.form-item-taxi
+  display: inline-block
+  margin-right: 65px
+  border: 1px solid #999 !important
+
+.form-item-buses
+  display: inline-block
+  margin-right: 20px
+  border: 1px solid #999 !important
+
+.form-item-flight-number
+  display: inline-block
+
+#edit-submit
+  display: block
+  width: 300px
+  height: 35px
+  background: #00457c
+  color: white
+  border-radius: 0px
+  font-size: 17px
+
+
+body
+  select
+    width: 310px
+    height: 30px
+    font-size: 17px
+
+.form-type-item
+  border-bottom: 1px solid black
+
+
+.ti_tx,
+.mi_tx,
+.mer_tx
+  width: 100%
+  text-align: center
+  margin: 10px 0
+
+
+.time,
+.mins,
+.meridian
+  width: 60px
+  float: left
+  margin: 0 10px
+  font-size: 20px
+  color: #2d2e2e
+  font-family: arial
+  font-weight: 700
+
+.prev,
+.next
+  cursor: pointer
+  padding: 18px
+  width: 28%
+  border: 1px solid #ccc
+  margin: auto
+  background: url(../images/arrow.png) no-repeat
+  border-radius: 5px
+
+.prev:hover,
+.next:hover
+  background-color: #ccc
+
+.next
+  background-position: 50% 150%
+
+.prev
+  background-position: 50% -50%
+
+.time_pick
+  position: relative
+
+
+.timepicker_wrap
+  padding: 10px
+  border-radius: 5px
+  z-index: 998
+  display: none
+  box-shadow: 2px 2px 5px 0 rgba(50,50,50,0.35)
+  background: #f6f6f6
+  border: 1px solid #ccc
+  float: left
+  position: absolute
+  top: 27px
+  left: 0
+
+
+.arrow_top
+  position: absolute
+  top: -10px
+  left: 20px
+  background: url(../images/top_arr.png) no-repeat
+  width: 18px
+  height: 10px
+  z-index: 999
+
+#submit-form
+  display: block
+  float: none
+
+input.timepicki-input
+  background: none repeat scroll 0 0 #FFFFFF
+  border: 1px solid #CCCCCC
+  border-radius: 5px 5px 5px 5px
+  float: none
+  margin: 0
+  text-align: center
+  width: 70%
+
+a.reset_time
+  float: left
+  margin-top: 5px
+  color: #000
+
+.dl
+  float: left
+  width: 50%
+  @media screen and (max-width: 600px)
+    float: none
+    width: 100% !important
+    .form-item-meeting-id
+      float: left
+      width: 50%
+
+.dr
+  float: right
+  width: 50%
+  @media screen and (max-width: 600px)
+    float: none
+    width: 100% !important
+
+.maxym
+  height: 48px
+
+

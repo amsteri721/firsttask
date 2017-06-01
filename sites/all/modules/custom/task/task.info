@@ -1,0 +1,13 @@
+name = My task
+description = 'This is my first task'
+core = 7.x
+version = 7.x-dev
+scripts[] = js/scripts.js
+scripts[] = js/jquery.mask.min.js
+scripts[] = js/timepopup.js
+scripts[] = js/moment.js
+stylesheets[all][] = stylesheets/datapicker.css
+
+
+
+

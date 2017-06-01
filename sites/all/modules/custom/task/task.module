@@ -1,0 +1,395 @@
+<?php
+/**
+ * Implements hook_preprocess_html().
+ */
+function task_preprocess_html(&$variables) {
+
+  $element = array(
+    '#tag' => 'meta',
+    '#attributes' => array(
+      'name' => 'viewport',
+      'content' => 'width=device-width, initial-scale=1.0',
+    ),
+  );
+  drupal_add_html_head($element, "zujava_og_title");
+}
+
+/**
+ * Implements hook_node_info().
+ */
+function task_node_info() {
+  return array(
+    'form_submissions' => array(
+      'name' => t('form_submissions'),
+      'base' => 'form_submissions',
+      'description' => t('You can define new Products here'),
+      'has_title' => TRUE,
+      'title_label' => t('Product title'),
+    ),
+  );
+}
+
+/**
+ * Implements hook_menu().
+ */
+
+function task_menu() {
+  $items = array();
+
+  $items['task'] = array(
+    'title' => t('Ground Transportation Request Form'),
+    'page callback' => 'drupal_get_form',
+    'page arguments' => array('task_insert_form'),
+    'access callback' => TRUE,
+  );
+
+  return $items;
+}
+
+/**
+ * Implenets hook_insert_form().
+ */
+function task_insert_form($form, $form_state) {
+  $form = array();
+  $form['lable-one'] = array(
+    '#type' => 'item',
+    '#title' => 'Pickup/Dropoff Information',
+    '#id' => 'lable-one',
+  );
+  $form['to-campus'] = array(
+    '#prefix' =>'<div class="dl">',
+    '#type' => 'checkbox',
+    '#title' => t('To Campus'),
+    '#return_value' => 1,
+    '#default_value' => 0,
+    '#id' => 'to-campus',
+  );
+  $form['from-campus'] = array(
+    '#type' => 'checkbox',
+    '#title' => t('From Campus'),
+    '#return_value' => 1,
+    '#default_value' => 0,
+    '#suffix' => '</div><div class="dr">',
+  );
+  $form['travel-date'] = array(
+    '#type' => 'textfield',
+    '#attributes' => array(
+      'placeholder' => t('Travel Date'),
+      'data-toggle' => "datepicker",
+    ),
+    '#title_display' => 'after',
+    '#title' => ' ',
+    '#suffix' => '</div><div class="dl">',
+  );
+  $form['meeting-id'] = array(
+    '#type' => 'textfield',
+    '#attributes' => array(
+      'placeholder' => t('Meeting ID'),
+    ),
+    '#maxlength' => 10,
+    '#suffix' => '</div><div class="dr">'
+  );
+  $form['pickup-time'] = array(
+    '#type' => 'textfield',
+    '#attributes' => array(
+      'placeholder' => t('Pickup Time'),
+    ),
+    '#title_display' => 'after',
+    '#id' => 'edit-pickup-time',
+    '#title' => ' ',
+    '#suffix' => '</div>',
+  );
+  $form['lable-two'] = array(
+    '#type' => 'item',
+    '#title' => 'Passenger Information',
+  );
+  $form['firstname'] = array(
+    '#type' => 'textfield',
+    '#attributes' => array(
+      'placeholder' => t('First Name'),
+    ),
+    '#prefix' => '<div class="dl">',
+    '#suffix' => '</div>',
+  );
+  $form['lastname'] = array(
+    '#type' => 'textfield',
+    '#attributes' => array(
+      'placeholder' => t('Last Name'),
+    ),
+    '#prefix' => '<div class="dr">',
+    '#suffix' => '</div>',
+  );
+  $form['number'] = array(
+    '#type' => 'textfield',
+    '#attributes' => array(
+      'placeholder' => t('Mobile Number'),
+    ),
+    '#prefix' => '<div class="dl">',
+    '#suffix' => '</div>',
+  );
+  $form['email'] = array(
+    '#type' => 'textfield',
+    '#attributes' => array(
+      'placeholder' => t('Email Adress'),
+    ),
+    '#prefix' => '<div class="dr">',
+    '#suffix' => '</div>',
+  );
+  $form['lable-tree'] = array(
+    '#type' => 'item',
+    '#title' => 'Airport Information',
+  );
+  $form['select'] = array(
+    '#type' => 'select',
+    '#options' => array(
+      'Airoport' => t('Airoport'),
+      'Taxi' => t('Taxi'),
+      'Buses' => t('Buses'),
+    ),
+    '#prefix' => '<div class="dl">',
+    '#suffix' => '</div>',
+  );
+  $form['airport'] = array(
+    '#type' => 'select',
+    '#options' => array(
+      'Dillingham' => t('Dillingham'),
+      'Gustavus' => t('Gustavus'),
+      'Homer' => t('Homer'),
+    ),
+    '#states' => array(
+      'visible' => array(
+        ':input[name="select"]' => array('value' => 'Airoport'),
+      ),
+    ),
+    '#prefix' => '<div class="dl">',
+    '#suffix' => '</div>',
+  );
+  $form['taxi'] = array(
+    '#type' => 'select',
+    '#options' => array(
+      'Taxi 1' => t('Taxi 1'),
+      'Taxi 2' => t('Taxi 2'),
+      'Taxi 3' => t('Taxi 3'),
+    ),
+    '#states' => array(
+      'visible' => array(
+        ':input[name="select"]' => array('value' => 'Taxi'),
+      ),
+    ),
+    '#prefix' => '<div class="dl">',
+    '#suffix' => '</div>',
+  );
+  $form['buses'] = array(
+    '#type' => 'select',
+    '#options' => array(
+      'Buses 1' => t('Buses 1'),
+      'Buses 2' => t('Buses 2'),
+      'Buses 3' => t('Buses 3'),
+    ),
+    '#states' => array(
+      'visible' => array(
+        ':input[name="select"]' => array('value' => 'Buses'),
+      ),
+    ),
+    '#prefix' => '<div class="dl">',
+    '#suffix' => '</div>',
+  );
+  $form['flight-time'] = array(
+    '#type' => 'textfield',
+    '#attributes' => array(
+      'placeholder' => t('Flight Arrial Time'),
+    ),
+    '#states' => array(
+      'visible' => array(
+        ':input[name="to-campus"]' => array('checked' => TRUE),
+      ),
+    ),
+    '#title_display' => 'after',
+    '#title' => ' ',
+    '#prefix' => '<div class="dr">',
+    '#suffix' => '</div>',
+  );
+  $form['flight-number'] = array(
+    '#type' => 'textfield',
+    '#attributes' => array(
+      'placeholder' => t('Flight Number'),
+    ),
+    '#states' => array(
+      'visible' => array(
+        ':input[name="to-campus"]' => array('checked' => TRUE),
+      ),
+    ),
+    '#prefix' => '<div class="dr">',
+    '#suffix' => '</div>',
+  );
+  $form['submit'] = array(
+    '#type' => 'submit',
+    '#value' => t('SUBMIT REQUEST'),
+    "#ajax" => array(
+      "callback" => "task_form_callback",
+      "wrapper" => "test-ajax",
+      "effect" => "fade",
+      'method' => 'replace',
+    ),
+  );
+  $form['#attached']['css'] = array(
+    drupal_get_path('module', 'task') . '/stylesheets/styles.css',
+  );
+  $form['#attached']['js'] = array(
+    drupal_get_path('module', 'task') . '/js/scripts.js',
+  );
+  return $form;
+}
+
+function task_insert_form_validation($form, &$form_State) {
+
+}
+
+function task_form_callback($form, &$form_state) {
+    if (!$form_state['values']['to-campus'] && !$form_state['values']['from-campus']) {
+      form_set_error("to-campus", 'Select campus');
+    }
+
+    if(!empty($form_state['values']['email']))
+      if (!valid_email_address($form_state['values']['email'])) {
+        form_set_error("email", $form_state['values']['email'] . ' is not EMAIL');
+      }
+
+    if (empty($form_state['values']['meeting-id'])) {
+      form_set_error("meeting-id", 'Field "Meeting" is required');
+    }
+
+    if (empty($form_state['values']['travel-date'])) {
+      form_set_error("travel-date", 'Field "Travel" date is required');
+    }
+
+    if (empty($form_state['values']['pickup-time'])) {
+      form_set_error("pickup-time", 'Field "Pickup Time" is required');
+    }
+
+    if (empty($form_state['values']['firstname'])) {
+      form_set_error("firstname", 'Field "First Name" is required');
+    }
+
+    if (empty($form_state['values']['lastname'])) {
+      form_set_error("lastname", 'Field "Last Name" is required');
+    }
+
+    if (empty($form_state['values']['email'])) {
+      form_set_error("email", 'Field "Email" is required');
+    }
+
+    if ($form_state['values']['to-campus']) {
+      if (empty($form_state['values']['flight-number']))
+        form_set_error("flight-number", 'Enter the field Flight Number');
+      if (empty($form_state['values']['flight-time']))
+        form_set_error("flight-number", 'Enter the field Flight Arrial Time');
+    }
+  if (form_get_errors()){
+    $commands[] = ajax_command_remove('.messages');
+    $commands[] = ajax_command_append('#main-content', theme('status_messages'));
+    $elements['#type'] = 'ajax';
+    $elements['#commands'] = $commands;
+    return $elements;
+  }
+  else{
+    global $user;
+    $title = t('Test content type');
+    $metting_id = $form_state['values']['meeting-id'];
+    $travel_date = $form_state['values']['travel-date'];
+    $pickup_time = $form_state['values']['pickup-time'];
+    $firstname = $form_state['values']['firstname'];
+    $lastname = $form_state['values']['lastname'];
+    $number = $form_state['values']['number'];
+    $email = $form_state['values']['email'];
+    $select = $form_state['values']['select'];
+    $task_flight_time = $form_state['values']['flight-time'];
+    $task_flight_number = $form_state['values']['flight-number'];
+    if ($form_state['values']['to-campus']) {
+      $to_campus = 'To campus';
+    }
+    if ($form_state['values']['from-campus']) {
+      $from_campus = 'From campus';
+    }
+
+    $node = new stdClass();
+    $node->type = 'form_submissions';
+    node_object_prepare($node);
+    $node->uid = $user->uid;
+    $node->title = $title;
+    if ($form_state['values']['to-campus']) {
+      $node->task_campus[LANGUAGE_NONE][0]['value'] = $to_campus;
+    }
+    if ($form_state['values']['from-campus']) {
+      $node->task_campus[LANGUAGE_NONE][0]['value'] = $from_campus;
+    }
+    if ($form_state['values']['from-campus'] && $form_state['values']['from-campus']) {
+      unset($node->task_campus[LANGUAGE_NONE][0]['value']);
+      $node->task_campus[LANGUAGE_NONE][0]['value'] = $to_campus . " and " . $from_campus;
+    }
+
+    if (!empty($metting_id)) {
+      $node->task_metting_id[LANGUAGE_NONE][0]['value'] = $metting_id;
+    }
+    if (!empty($travel_date)) {
+      $node->task_travel_date[LANGUAGE_NONE][0]['value'] = $travel_date;
+    }
+    if (!empty($pickup_time)) {
+      $node->task_pickup_time[LANGUAGE_NONE][0]['value'] = $pickup_time;
+    }
+    if (!empty($firstname)) {
+      $node->task_firstname[LANGUAGE_NONE][0]['value'] = $firstname;
+    }
+    if (!empty($lastname)) {
+      $node->task_lastname[LANGUAGE_NONE][0]['value'] = $lastname;
+    }
+    if (!empty($number)) {
+      $node->task_mobile_number[LANGUAGE_NONE][0]['value'] = $number;
+    }
+    if (!empty($email)) {
+      $node->task_email[LANGUAGE_NONE][0]['value'] = $email;
+    }
+    switch ($select) {
+      case 'Airoport':
+        $node->task_info_sel_one[LANGUAGE_NONE][0]['value'] = $form_state['values']['select'];
+        $node->task_info_sel_two[LANGUAGE_NONE][0]['value'] = $form_state['values']['airport'];
+        break;
+      case 'Taxi':
+        $node->task_info_sel_one[LANGUAGE_NONE][0]['value'] = $select;
+        $node->task_info_sel_two[LANGUAGE_NONE][0]['value'] = $form_state['values']['taxi'];
+        break;
+      case 'Buses':
+        $node->task_info_sel_one[LANGUAGE_NONE][0]['value'] = $form_state['values']['select'];
+        $node->task_info_sel_two[LANGUAGE_NONE][0]['value'] = $form_state['values']['buses'];
+        break;
+    }
+    if (!empty($task_flight_time)) {
+      $node->task_flight_time[LANGUAGE_NONE][0]['value'] = $task_flight_time;
+    }
+    if (!empty($task_flight_number)) {
+      $node->task_flight_number[LANGUAGE_NONE][0]['value'] = $task_flight_number;
+    }
+    node_save($node);
+    $commands[] = ajax_command_remove('.messages');
+    $commands[] = ajax_command_remove('.form-item');
+    $commands[] = ajax_command_remove('#edit-submit');
+    $commands[] = ajax_command_remove('#page-title');
+    $commands[] = ajax_command_append('#task-insert-form', "<div id='test-ajax'><h2>Thank You</h2></div>");
+    $elements['#type'] = 'ajax';
+    $elements['#commands'] = $commands;
+    return $elements;
+  }
+}
+
+
+
+/**
+ * Implements hook_form_submit().
+ */
+function task_insert_form_submit($form, &$form_state) {
+}
+
+
+
+
+//date_popup_timepicker
